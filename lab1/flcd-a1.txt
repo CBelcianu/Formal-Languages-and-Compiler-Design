@@ -1,0 +1,95 @@
+C subset mini-language
+
+Language Soecification:
+	1. Language Definition:
+		1.1 Alphabet
+		1.1.a) Upper (A-Z) and lower case letters (a-z) of the English alphabet
+		1.1.b) Underline character '_'
+		1.1.c) Decimal digits (0-9)
+		
+		Lexic:
+			a) Special symbols, repressenting:
+				-operators:
+					->arithmetic: +, -, /, %, *
+					->assignment: =
+					->logic: !, &&, ||
+					->relational: <, >, ==, !=, <=, >=
+				-separators: [], {}, ;, space
+				-reserved words:  int, char, while, if, else, printf, scanf, return, for
+				
+			b) Identifiers:
+				identifier = ["_"]letter[{letter | digit}]
+				letter = "A" | "B" | ... | "Z" | "a" | "b" | ... | "z"
+				digit = "0" | "1" | ... | "9"
+				
+			c) Constants:
+				1. 	integer = ["+" | "-"]nonzero_digit{digit} | "0"
+					nonzero_digit = "1" | "2" | ... | "9"
+				2. 	character = 'letter'|'digit'
+				
+	2. Syntax: The words - predefined tokens are specified between " and ":
+		
+		a) Sintactical Rules:
+			program = int main() "{" stmtlist "}"
+			stmtlist = stmt{stmt}
+			stmt = declstmt | assignstmt | iostmt | whilestmt | forstmt | ifstmt
+			declstmt = vardeclstmt | arraydeclstmt
+			vardeclstmt = type identifier";"
+			arraydeclstmt = type identifier"["nonzero_digit"]"";"
+			type = "int" | "char"
+			assignstmt = varassignstmt | arrayasignstmt
+			varassignstmt = identifier "=" expression";"
+			arrayassignstmt = identifier"["nonzero_digit"]" "=" expression";"
+			iostmt = input | output
+			input = "scanf""(" identifier ")"";"
+			output = "printf""(" expression ")"";"
+			whilestmt = "while""(" condition ") "{" stmtlist "}"
+			ifstmt = "if""(" condition ")""{" stmtlist "}" [ "else""{" stmtlist "}" ]
+			forstmt = "for""(" condition ")""{" stmtlist "}"
+			condition = expression
+			expression = expression operation expression | term
+			operation = "+" | "-" | "*" | "/" | "%" | "||" | "&&"
+			term = identifier | digit
+			
+		b) lexical rules:
+			IDENTIFIER = letter | letter{letter}{digit}
+			letter = "A" | "B" |...| "Z" | "a" | "b" | ... | "z"
+			digit = "0" | "1" |...| "9"
+			RELATION = "<" | "<=" | "==" | "!=" | ">=" | ">" | "&&" | "||"
+			
+			
+		Codification table:
+		
+		identifier -> 0
+		constant -> 1
+		int -> 2
+		main -> 3
+		( -> 4
+		) -> 5
+		{ -> 6
+		{ -> 7
+		char -> 8
+		[ -> 9
+		] -> 10
+		; -> 11
+		if -> 12
+		for -> 13
+		while -> 14
+		= -> 15
+		== -> 16
+		!= -> 17
+		< -> 18
+		<= -> 19
+		> -> 20
+		>= -> 21
+		&& -> 22
+		|| -> 23
+		+ -> 24
+		- -> 25
+		* -> 26
+		/ -> 27
+		% -> 28
+		printf -> 29
+		scanf -> 30
+		else -> 31
+		return -> 32
