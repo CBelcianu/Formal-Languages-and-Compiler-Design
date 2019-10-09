@@ -1,20 +1,24 @@
 C subset mini-language
 
-Language Soecification:
+EBNF
+
+Language Specification:
+
 	1. Language Definition:
+	
 		1.1 Alphabet
-		1.1.a) Upper (A-Z) and lower case letters (a-z) of the English alphabet
-		1.1.b) Underline character '_'
-		1.1.c) Decimal digits (0-9)
+			a) Upper (A-Z) and lower case letters (a-z) of the English alphabet
+			b) Underline character '_'
+			c) Decimal digits (0-9)
 		
-		Lexic:
+		1.2 Lexic:
 			a) Special symbols, repressenting:
 				-operators:
-					->arithmetic: +, -, /, %, *
+					->arithmetic: +, -, /, %, *, ++, --
 					->assignment: =
 					->logic: !, &&, ||
 					->relational: <, >, ==, !=, <=, >=
-				-separators: [], {}, ;, space
+				-separators: [], (), {}, ,, ;, space
 				-reserved words:  int, char, while, if, else, printf, scanf, return, for
 				
 			b) Identifiers:
@@ -30,7 +34,7 @@ Language Soecification:
 	2. Syntax: The words - predefined tokens are specified between " and ":
 		
 		a) Sintactical Rules:
-			program = int main() "{" stmtlist "}"
+			program = "int main()" "{" stmtlist "}"
 			stmtlist = stmt{stmt}
 			stmt = declstmt | assignstmt | iostmt | whilestmt | forstmt | ifstmt
 			declstmt = vardeclstmt | arraydeclstmt
@@ -39,17 +43,21 @@ Language Soecification:
 			type = "int" | "char"
 			assignstmt = varassignstmt | arrayasignstmt
 			varassignstmt = identifier "=" expression";"
-			arrayassignstmt = identifier"["nonzero_digit"]" "=" expression";"
+			arrayassignstmt = identifier"["digit"]" "=" expression";"
 			iostmt = input | output
 			input = "scanf""(" identifier ")"";"
 			output = "printf""(" expression ")"";"
 			whilestmt = "while""(" condition ") "{" stmtlist "}"
 			ifstmt = "if""(" condition ")""{" stmtlist "}" [ "else""{" stmtlist "}" ]
-			forstmt = "for""(" condition ")""{" stmtlist "}"
+			forstmt = "for""(" varassignstmt "," condition "," varmodifystmt ")""{" stmtlist "}"
+			varmodifystmt = varindentstmt | vardecrementstmt
+			varindentstmt = identifier"++"
+			vardecrementstmt = identifier"--"
 			condition = expression
 			expression = expression operation expression | term
 			operation = "+" | "-" | "*" | "/" | "%" | "||" | "&&"
-			term = identifier | digit
+			term = identifier | const
+			const = nonzero_digit{digit}
 			
 		b) lexical rules:
 			IDENTIFIER = letter | letter{letter}{digit}
@@ -93,3 +101,6 @@ Language Soecification:
 		scanf -> 30
 		else -> 31
 		return -> 32
+		, -> 33
+		++ -> 34
+		-- -> 35
