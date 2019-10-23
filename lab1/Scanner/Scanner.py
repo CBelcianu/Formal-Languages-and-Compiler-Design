@@ -6,7 +6,7 @@ def isIdentifier(token):
 
 
 def isConstant(token):
-    return token.isdigit() or (token[0] == '\'' and token[-1] == '\'')
+    return token.isdigit() or (token[0] == '\'' and token[-1] == '\'') or (token[0] == '-' or token[0] == '+' and token[1:].isdigit())
 
 
 def isPartOfOperator(char):
@@ -39,7 +39,7 @@ def fetchOperator(line, index):
     return token, index
 
 
-def tokenResolver(line, separators):
+def tokenize(line, separators):
     token = ''
     index = 0
 
@@ -52,11 +52,36 @@ def tokenResolver(line, separators):
             token = ''
 
         elif isPartOfOperator(line[index]):
-            if token:
+            if line[index-1].isdigit():
                 yield token
-            token, index = fetchOperator(line, index)
-            yield token
-            token = ''
+                token = ''
+            index1 = index
+            spaceCnt = 0
+            if line[index1] == '+' or line[index1] == '-':
+                if ((line[index1-1]==' ' and line[index1-2].isdigit())  or line[index1-1].isdigit()) and ((line[index1+1]==' ' and line[index1+2].isdigit())  or line[index1+1].isdigit()):
+                    token += "+"
+                    yield token
+                    token = ""
+                    index1 += 1
+                    index = index1
+                else:
+                    if line[index1+1].isdigit():
+                        spaceCnt = 1
+                    while (line[index1].isdigit() or line[index1] == ' ' or isPartOfOperator(line[index1])) and spaceCnt < 2:
+                        if line[index1].isdigit() or isPartOfOperator(line[index1]):
+                            token += line[index1]
+                            index1 += 1
+                        elif line[index1] == ' ':
+                            spaceCnt += 1
+                            index1 += 1
+                    index = index1
+                    spaceCnt = 0
+            else:
+                if token:
+                    yield token
+                token, index = fetchOperator(line, index)
+                yield token
+                token = ''
 
         elif line[index] in separators:
             if token:
