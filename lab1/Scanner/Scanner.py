@@ -58,17 +58,24 @@ def tokenize(line, separators):
             index1 = index
             spaceCnt = 0
             if line[index1] == '+' or line[index1] == '-':
-                if line[index1+1].isdigit():
-                    spaceCnt = 1
-                while (line[index1].isdigit() or line[index1] == ' ' or isPartOfOperator(line[index1])) and spaceCnt < 2:
-                    if line[index1].isdigit() or isPartOfOperator(line[index1]):
-                        token += line[index1]
-                        index1 += 1
-                    elif line[index1] == ' ':
-                        spaceCnt += 1
-                        index1 += 1
-                index = index1
-                spaceCnt = 0
+                if ((line[index1-1]==' ' and line[index1-2].isdigit())  or line[index1-1].isdigit()) and ((line[index1+1]==' ' and line[index1+2].isdigit())  or line[index1+1].isdigit()):
+                    token += "+"
+                    yield token
+                    token = ""
+                    index1 += 1
+                    index = index1
+                else:
+                    if line[index1+1].isdigit():
+                        spaceCnt = 1
+                    while (line[index1].isdigit() or line[index1] == ' ' or isPartOfOperator(line[index1])) and spaceCnt < 2:
+                        if line[index1].isdigit() or isPartOfOperator(line[index1]):
+                            token += line[index1]
+                            index1 += 1
+                        elif line[index1] == ' ':
+                            spaceCnt += 1
+                            index1 += 1
+                    index = index1
+                    spaceCnt = 0
             else:
                 if token:
                     yield token

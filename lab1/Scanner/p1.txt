@@ -1,5 +1,5 @@
 int main(){
-int nr = +6;
+int nr = 0 + 6;
 int a;
 a=nr;
 '$'
