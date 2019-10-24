@@ -2,7 +2,7 @@ from Specs import operators
 
 
 def isIdentifier(token):
-    return token[0].isalpha() and len(token) < 8
+    return token[0].isalpha() and len(token) < 250
 
 
 def isConstant(token):
@@ -52,13 +52,14 @@ def tokenize(line, separators):
             token = ''
 
         elif isPartOfOperator(line[index]):
-            if line[index-1].isdigit():
+            if line[index-1].isdigit() or line[index-1].isalpha():
                 yield token
                 token = ''
             index1 = index
             spaceCnt = 0
             if line[index1] == '+' or line[index1] == '-':
-                if ((line[index1-1]==' ' and line[index1-2].isdigit())  or line[index1-1].isdigit()) and ((line[index1+1]==' ' and line[index1+2].isdigit())  or line[index1+1].isdigit()):
+                if ((line[index1-1]==' ' and (line[index1-2].isdigit() or line[index1-2].isalpha()))  or (line[index1-1].isdigit() or line[index1-1].isalpha())) and ((line[index1+1]==' ' and (line[index1+2].isdigit() or line[index1+2].isalpha()))  or (line[index1+1].isdigit() or line[index1+1].isalpha())):
+                    #token = ''
                     token += "+"
                     yield token
                     token = ""
