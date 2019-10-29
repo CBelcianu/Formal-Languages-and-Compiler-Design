@@ -4,26 +4,22 @@ class HashTable(object):
 
     def hash(self, key):
         length = len(self.array)
-        return hash(key) % length
-
-    def resolveCollision(self, value):
-        for i in range(len(self.array)):
-            if self.array[i] is None:
-                self.array[i] = [[i, value]]
-                return
+        return key % length
 
     def add(self, key, value):
         index = self.hash(key)
         if self.array[index] is not None:
+            cnt = 0
             for kvp in self.array[index]:
                 if kvp[0] == key and not self.get(index) == value:
-                    self.resolveCollision(value)
+                    self.array[index][cnt].append(value)
                     break
+                cnt += 1
             else:
-                self.array[index].append([key, value])
+                self.array[index].append([index, value])
         else:
             self.array[index] = []
-            self.array[index].append([key, value])
+            self.array[index].append([index, value])
         for i in range(len(self.array)):
             if self.array[i] is not None:
                 self.array[i] = [self.array[i][0]]
@@ -42,8 +38,11 @@ class HashTable(object):
 
     def getKey(self, value):
         for i in self.array:
-            if value in i:
-                return i
+            try:
+                if value in i[0]:
+                    return i[0][1]
+            except TypeError:
+                return None
         return -1
 
     def isFull(self):

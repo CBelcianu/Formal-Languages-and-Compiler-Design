@@ -1,9 +1,8 @@
 int main(){
-int nr = 0 + 6;
-int a;
+int nr = nr-1;
+int a=-6;
 a=nr;
-'$'
-int b=a;
+int b='a';
 printf(a);
 return 0;
 }

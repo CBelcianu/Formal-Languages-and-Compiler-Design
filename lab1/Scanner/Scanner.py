@@ -1,12 +1,17 @@
 from Specs import operators
+import re
 
 
 def isIdentifier(token):
-    return token[0].isalpha() and len(token) < 8
+    return re.match('^([_])?[a-zA-Z]([a-zA-Z]|[0-9]){,7}$', token) is not None
 
 
-def isConstant(token):
-    return token.isdigit() or (token[0] == '\'' and token[-1] == '\'') or (token[0] == '-' or token[0] == '+' and token[1:].isdigit())
+def isCharConstant(token):
+    return re.match('^\'([a-zA-Z])\'$', token) is not None
+
+
+def isIntConstant(token):
+    return re.match('^[1-9][0-9]*$', token) is not None or re.match('^0$', token) is not None
 
 
 def isPartOfOperator(char):
@@ -16,23 +21,23 @@ def isPartOfOperator(char):
     return False
 
 
-def fetchToken(line, index):
+def fetchOperator(line, index):
     token = ''
-    quoteCount = 0
 
-    while index < len(line) and quoteCount < 2:
-        if line[index] == '"':
-            quoteCount += 1
+    while index < len(line) and isPartOfOperator(line[index]) and isPartOfOperator(token+line[index]):
         token += line[index]
         index += 1
 
     return token, index
 
 
-def fetchOperator(line, index):
+def fetchString(line, index):
     token = ''
+    quote_count = 0
 
-    while index < len(line) and isPartOfOperator(line[index]):
+    while index < len(line) and quote_count < 2:
+        if line[index] == "'":
+            quote_count += 1
         token += line[index]
         index += 1
 
@@ -40,58 +45,36 @@ def fetchOperator(line, index):
 
 
 def tokenize(line, separators):
-    token = ''
+    token = ""
     index = 0
+    tokens = []
 
     while index < len(line):
-        if line[index] == '"':
+        if line[index] == "'":
             if token:
-                yield token
-            token, index = fetchToken(line, index)
-            yield token
+                tokens.append(token)
+            token, index = fetchString(line, index)
+            tokens.append(token)
             token = ''
 
         elif isPartOfOperator(line[index]):
-            if line[index-1].isdigit():
-                yield token
-                token = ''
-            index1 = index
-            spaceCnt = 0
-            if line[index1] == '+' or line[index1] == '-':
-                if ((line[index1-1]==' ' and line[index1-2].isdigit())  or line[index1-1].isdigit()) and ((line[index1+1]==' ' and line[index1+2].isdigit())  or line[index1+1].isdigit()):
-                    token += "+"
-                    yield token
-                    token = ""
-                    index1 += 1
-                    index = index1
-                else:
-                    if line[index1+1].isdigit():
-                        spaceCnt = 1
-                    while (line[index1].isdigit() or line[index1] == ' ' or isPartOfOperator(line[index1])) and spaceCnt < 2:
-                        if line[index1].isdigit() or isPartOfOperator(line[index1]):
-                            token += line[index1]
-                            index1 += 1
-                        elif line[index1] == ' ':
-                            spaceCnt += 1
-                            index1 += 1
-                    index = index1
-                    spaceCnt = 0
-            else:
-                if token:
-                    yield token
-                token, index = fetchOperator(line, index)
-                yield token
-                token = ''
-
+            if token:
+                tokens.append(token)
+            token, index = fetchOperator(line, index)
+            tokens.append(token)
+            token = ''
         elif line[index] in separators:
             if token:
-                yield token
+                tokens.append(token)
             token, index = line[index], index + 1
-            yield token
+            tokens.append(token)
             token = ''
 
         else:
             token += line[index]
             index += 1
+
     if token:
-        yield token
+        tokens.append(token)
+
+    return tokens
