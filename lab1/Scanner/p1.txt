@@ -1,5 +1,5 @@
 int main(){
-int nr = nr-1;
+int _nr = nr-1;
 int a=-6;
 a=nr;
 int b='a';

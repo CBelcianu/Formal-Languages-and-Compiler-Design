@@ -16,7 +16,9 @@ for line in lines:
     i = 0
     while i in range(len(tokens)):
         if tokens[i] in toEncode:
-            if tokens[i] != '+' and tokens[i] != '-':
+            if tokens[i] == ' ':
+                i += 1
+            elif tokens[i] != '+' and tokens[i] != '-':
                 pif.add(codification[tokens[i]], -1)
                 i += 1
             elif (tokens[i] == '-' or tokens[i] == '+') and isIntConstant(tokens[i+1]) and tokens[i-1] in toEncode:
@@ -34,7 +36,6 @@ for line in lines:
             else:
                 pif.add(codification[tokens[i]], -1)
                 i += 1
-
         elif isIdentifier(tokens[i]):
             pos = symbolTable.get(tokens[i])
             if pos is None:

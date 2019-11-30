@@ -53,7 +53,7 @@ Language Specification:
 			varmodifystmt = varindentstmt | vardecrementstmt
 			varindentstmt = identifier"++"
 			vardecrementstmt = identifier"--"
-			condition = expression
+			condition = expression operation expression
 			expression = expression operation expression | term
 			operation = "+" | "-" | "*" | "/" | "%" | "||" | "&&"
 			term = identifier | const

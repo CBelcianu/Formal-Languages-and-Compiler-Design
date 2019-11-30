@@ -1,0 +1,95 @@
+G = (N, E, P, S)
+
+N = {
+	program,
+	stmtlist,
+	stmt,
+	declstmt,
+	assignstmt,
+	iostmt,
+	whilestmt,
+	forstmt,
+	ifstmt,
+	vardeclstmt,
+	arraydeclstmt,
+	varmodifystmt,
+	varindentstmt,
+	vardecrementstmt
+	input,
+	output,
+	expression,
+	condition,
+	operation,
+	term,
+	const,
+	identifier,
+	nonzero_digit,
+	digit,
+	type
+}
+
+E = {
+	2,
+	8,
+	3,
+	4,
+	5,
+	6,
+	7,
+	9,
+	10,
+	11,
+	30,
+	29,
+	15,
+	24,
+	25,
+	27,
+	26,
+	28,
+	22,
+	23,
+	35,
+	34,
+	16,
+	36,
+	17,
+	18,
+	20,
+	19,
+	21,
+	12,
+	31,
+	13,
+	14,
+	37
+}
+
+S = program
+
+P = {
+	program -> 2 3 45 6stmtlist7,
+	stmtlist -> stmtlist|stmt,
+	stmt -> declstmt|assignstmt|iostmt|whilestmt|forstmt|ifstmt,
+	declstmt -> vardeclstmt|arraydeclstmt
+	vardeclstmt -> type 0;
+	arraydeclstmt -> type 0 9nonzero_digit10;
+	type -> 2|8
+	assignstmt -> varassignstmt|arrayasignstmt
+	varassignstmt -> 0 15 expression;
+	arrayassignstmt -> 0 9digit10 15 expression;
+	iostmt -> input|output
+	input -> 30 4 0 5;
+	output -> 29 4 expression 5;
+	whilestmt -> 14 4 condition 5 6stmtlist7
+	ifstmt -> 12 4 condition5 6stmtlist7|12 4condition5 6stmtlist7 else 6stmtlist7
+	forstmt -> 13 4varassignstmt 11 condition 11 varmodifystmt5 6stmtlist7
+	varmodifystmt -> varindentstmt|vardecrementstmt
+	varindentstmt -> 0 34
+	vardecrementstmt -> 0 35	
+	condition -> expression operation expression
+	expression = expression operation expression|term
+	operation = 24|25|26|27|28|23|22
+}
+
+1c2b
