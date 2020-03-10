@@ -1,0 +1,4 @@
+win_bison -d snazzle.y
+win_flex snazzle.l
+g++ snazzle.tab.c lex.yy.c -o snazzle.exe
+snazzle.exe

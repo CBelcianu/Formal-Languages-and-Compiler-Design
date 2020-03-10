@@ -1,0 +1,1138 @@
+Terminals unused in grammar
+
+    ceva10
+    ceva20
+    ceva22
+    ceva24
+    ceva27
+    ceva28
+    ceva29
+    ceva32
+    ceva40
+    ceva46
+    ceva47
+    ceva48
+    ceva49
+
+
+State 82 conflicts: 7 shift/reduce
+
+
+Grammar
+
+    0 $accept: all $end
+
+    1 all: include program
+
+    2 include: ceva13 ceva43 ceva19 library ceva23
+
+    3 library: ceva44
+    4        | ceva45
+
+    5 program: ceva33 ceva42 ceva6 ceva7 stmtlist
+
+    6 stmtlist: ceva4 auxstmt ceva5
+
+    7 auxstmt: stmt auxstmt
+    8        | stmt
+
+    9 stmt: declstmt
+   10     | assignstmt
+   11     | iostmt
+   12     | whilestmt
+   13     | forstmt
+   14     | ifstmt
+
+   15 declstmt: vardeclstmt
+   16         | arraydeclstmt
+
+   17 vardeclstmt: type ceva0 ceva8
+
+   18 arraydeclstmt: type ceva0 ceva2 ceva1 ceva3 ceva8
+
+   19 type: ceva33
+   20     | ceva34
+
+   21 assignstmt: varassignstmt
+   22           | arrayassignstmt
+
+   23 varassignstmt: ceva0 ceva21 expresie ceva8
+
+   24 arrayassignstmt: ceva0 ceva2 ceva1 ceva3 ceva21 expresie ceva8
+
+   25 iostmt: input
+   26       | output
+
+   27 input: ceva39 ceva12 ceva0 ceva8
+
+   28 output: ceva38 ceva11 expresie ceva8
+
+   29 whilestmt: ceva35 ceva6 conditie ceva7 stmtlist
+
+   30 ifstmt: ceva36 ceva6 conditie ceva7 stmtlist
+   31       | ceva36 ceva6 conditie ceva7 stmtlist ceva37 stmtlist
+
+   32 forstmt: ceva41 ceva6 varassignstmt ceva8 conditie ceva8 varmodifystmt ceva7 ceva4 stmtlist ceva5
+
+   33 varmodifystmt: varindentstmt
+   34              | vardecrementstmt
+
+   35 varindentstmt: ceva0 ceva31
+
+   36 vardecrementstmt: ceva0 ceva30
+
+   37 conditie: expresie
+
+   38 expresie: expresie operatie expresie
+   39         | term
+
+   40 operatie: ceva14
+   41         | ceva15
+   42         | ceva16
+   43         | ceva17
+   44         | ceva18
+   45         | ceva26
+   46         | ceva25
+
+   47 term: ceva0
+   48     | ceva1
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    ceva0 <ival> (258) 17 18 23 24 27 35 36 47
+    ceva1 <ival> (259) 18 24 48
+    ceva2 <ival> (260) 18 24
+    ceva3 <ival> (261) 18 24
+    ceva4 <ival> (262) 6 32
+    ceva5 <ival> (263) 6 32
+    ceva6 <ival> (264) 5 29 30 31 32
+    ceva7 <ival> (265) 5 29 30 31 32
+    ceva8 <ival> (266) 17 18 23 24 27 28 32
+    ceva10 <ival> (267)
+    ceva11 <ival> (268) 28
+    ceva12 <ival> (269) 27
+    ceva13 <ival> (270) 2
+    ceva14 <ival> (271) 40
+    ceva15 <ival> (272) 41
+    ceva16 <ival> (273) 42
+    ceva17 <ival> (274) 43
+    ceva18 <ival> (275) 44
+    ceva19 <ival> (276) 2
+    ceva20 <ival> (277)
+    ceva21 <ival> (278) 23 24
+    ceva22 <ival> (279)
+    ceva23 <ival> (280) 2
+    ceva24 <ival> (281)
+    ceva25 <ival> (282) 46
+    ceva26 <ival> (283) 45
+    ceva27 <ival> (284)
+    ceva28 <ival> (285)
+    ceva29 <ival> (286)
+    ceva30 <ival> (287) 36
+    ceva31 <ival> (288) 35
+    ceva32 <ival> (289)
+    ceva33 <ival> (290) 5 19
+    ceva34 <ival> (291) 20
+    ceva35 <ival> (292) 29
+    ceva36 <ival> (293) 30 31
+    ceva37 <ival> (294) 31
+    ceva38 <ival> (295) 28
+    ceva39 <ival> (296) 27
+    ceva40 <ival> (297)
+    ceva41 <ival> (298) 32
+    ceva42 <ival> (299) 5
+    ceva43 <ival> (300) 2
+    ceva44 <ival> (301) 3
+    ceva45 <ival> (302) 4
+    ceva46 <ival> (303)
+    ceva47 <ival> (304)
+    ceva48 <ival> (305)
+    ceva49 <ival> (306)
+
+
+Nonterminals, with rules where they appear
+
+    $accept (52)
+        on left: 0
+    all (53)
+        on left: 1
+        on right: 0
+    include (54)
+        on left: 2
+        on right: 1
+    library (55)
+        on left: 3 4
+        on right: 2
+    program (56)
+        on left: 5
+        on right: 1
+    stmtlist (57)
+        on left: 6
+        on right: 5 29 30 31 32
+    auxstmt (58)
+        on left: 7 8
+        on right: 6 7
+    stmt (59)
+        on left: 9 10 11 12 13 14
+        on right: 7 8
+    declstmt (60)
+        on left: 15 16
+        on right: 9
+    vardeclstmt (61)
+        on left: 17
+        on right: 15
+    arraydeclstmt (62)
+        on left: 18
+        on right: 16
+    type (63)
+        on left: 19 20
+        on right: 17 18
+    assignstmt (64)
+        on left: 21 22
+        on right: 10
+    varassignstmt (65)
+        on left: 23
+        on right: 21 32
+    arrayassignstmt (66)
+        on left: 24
+        on right: 22
+    iostmt (67)
+        on left: 25 26
+        on right: 11
+    input (68)
+        on left: 27
+        on right: 25
+    output (69)
+        on left: 28
+        on right: 26
+    whilestmt (70)
+        on left: 29
+        on right: 12
+    ifstmt (71)
+        on left: 30 31
+        on right: 14
+    forstmt (72)
+        on left: 32
+        on right: 13
+    varmodifystmt (73)
+        on left: 33 34
+        on right: 32
+    varindentstmt (74)
+        on left: 35
+        on right: 33
+    vardecrementstmt (75)
+        on left: 36
+        on right: 34
+    conditie (76)
+        on left: 37
+        on right: 29 30 31 32
+    expresie (77)
+        on left: 38 39
+        on right: 23 24 28 37 38
+    operatie (78)
+        on left: 40 41 42 43 44 45 46
+        on right: 38
+    term (79)
+        on left: 47 48
+        on right: 39
+
+
+State 0
+
+    0 $accept: . all $end
+
+    ceva13  shift, and go to state 1
+
+    all      go to state 2
+    include  go to state 3
+
+
+State 1
+
+    2 include: ceva13 . ceva43 ceva19 library ceva23
+
+    ceva43  shift, and go to state 4
+
+
+State 2
+
+    0 $accept: all . $end
+
+    $end  shift, and go to state 5
+
+
+State 3
+
+    1 all: include . program
+
+    ceva33  shift, and go to state 6
+
+    program  go to state 7
+
+
+State 4
+
+    2 include: ceva13 ceva43 . ceva19 library ceva23
+
+    ceva19  shift, and go to state 8
+
+
+State 5
+
+    0 $accept: all $end .
+
+    $default  accept
+
+
+State 6
+
+    5 program: ceva33 . ceva42 ceva6 ceva7 stmtlist
+
+    ceva42  shift, and go to state 9
+
+
+State 7
+
+    1 all: include program .
+
+    $default  reduce using rule 1 (all)
+
+
+State 8
+
+    2 include: ceva13 ceva43 ceva19 . library ceva23
+
+    ceva44  shift, and go to state 10
+    ceva45  shift, and go to state 11
+
+    library  go to state 12
+
+
+State 9
+
+    5 program: ceva33 ceva42 . ceva6 ceva7 stmtlist
+
+    ceva6  shift, and go to state 13
+
+
+State 10
+
+    3 library: ceva44 .
+
+    $default  reduce using rule 3 (library)
+
+
+State 11
+
+    4 library: ceva45 .
+
+    $default  reduce using rule 4 (library)
+
+
+State 12
+
+    2 include: ceva13 ceva43 ceva19 library . ceva23
+
+    ceva23  shift, and go to state 14
+
+
+State 13
+
+    5 program: ceva33 ceva42 ceva6 . ceva7 stmtlist
+
+    ceva7  shift, and go to state 15
+
+
+State 14
+
+    2 include: ceva13 ceva43 ceva19 library ceva23 .
+
+    $default  reduce using rule 2 (include)
+
+
+State 15
+
+    5 program: ceva33 ceva42 ceva6 ceva7 . stmtlist
+
+    ceva4  shift, and go to state 16
+
+    stmtlist  go to state 17
+
+
+State 16
+
+    6 stmtlist: ceva4 . auxstmt ceva5
+
+    ceva0   shift, and go to state 18
+    ceva33  shift, and go to state 19
+    ceva34  shift, and go to state 20
+    ceva35  shift, and go to state 21
+    ceva36  shift, and go to state 22
+    ceva38  shift, and go to state 23
+    ceva39  shift, and go to state 24
+    ceva41  shift, and go to state 25
+
+    auxstmt          go to state 26
+    stmt             go to state 27
+    declstmt         go to state 28
+    vardeclstmt      go to state 29
+    arraydeclstmt    go to state 30
+    type             go to state 31
+    assignstmt       go to state 32
+    varassignstmt    go to state 33
+    arrayassignstmt  go to state 34
+    iostmt           go to state 35
+    input            go to state 36
+    output           go to state 37
+    whilestmt        go to state 38
+    ifstmt           go to state 39
+    forstmt          go to state 40
+
+
+State 17
+
+    5 program: ceva33 ceva42 ceva6 ceva7 stmtlist .
+
+    $default  reduce using rule 5 (program)
+
+
+State 18
+
+   23 varassignstmt: ceva0 . ceva21 expresie ceva8
+   24 arrayassignstmt: ceva0 . ceva2 ceva1 ceva3 ceva21 expresie ceva8
+
+    ceva2   shift, and go to state 41
+    ceva21  shift, and go to state 42
+
+
+State 19
+
+   19 type: ceva33 .
+
+    $default  reduce using rule 19 (type)
+
+
+State 20
+
+   20 type: ceva34 .
+
+    $default  reduce using rule 20 (type)
+
+
+State 21
+
+   29 whilestmt: ceva35 . ceva6 conditie ceva7 stmtlist
+
+    ceva6  shift, and go to state 43
+
+
+State 22
+
+   30 ifstmt: ceva36 . ceva6 conditie ceva7 stmtlist
+   31       | ceva36 . ceva6 conditie ceva7 stmtlist ceva37 stmtlist
+
+    ceva6  shift, and go to state 44
+
+
+State 23
+
+   28 output: ceva38 . ceva11 expresie ceva8
+
+    ceva11  shift, and go to state 45
+
+
+State 24
+
+   27 input: ceva39 . ceva12 ceva0 ceva8
+
+    ceva12  shift, and go to state 46
+
+
+State 25
+
+   32 forstmt: ceva41 . ceva6 varassignstmt ceva8 conditie ceva8 varmodifystmt ceva7 ceva4 stmtlist ceva5
+
+    ceva6  shift, and go to state 47
+
+
+State 26
+
+    6 stmtlist: ceva4 auxstmt . ceva5
+
+    ceva5  shift, and go to state 48
+
+
+State 27
+
+    7 auxstmt: stmt . auxstmt
+    8        | stmt .
+
+    ceva0   shift, and go to state 18
+    ceva33  shift, and go to state 19
+    ceva34  shift, and go to state 20
+    ceva35  shift, and go to state 21
+    ceva36  shift, and go to state 22
+    ceva38  shift, and go to state 23
+    ceva39  shift, and go to state 24
+    ceva41  shift, and go to state 25
+
+    $default  reduce using rule 8 (auxstmt)
+
+    auxstmt          go to state 49
+    stmt             go to state 27
+    declstmt         go to state 28
+    vardeclstmt      go to state 29
+    arraydeclstmt    go to state 30
+    type             go to state 31
+    assignstmt       go to state 32
+    varassignstmt    go to state 33
+    arrayassignstmt  go to state 34
+    iostmt           go to state 35
+    input            go to state 36
+    output           go to state 37
+    whilestmt        go to state 38
+    ifstmt           go to state 39
+    forstmt          go to state 40
+
+
+State 28
+
+    9 stmt: declstmt .
+
+    $default  reduce using rule 9 (stmt)
+
+
+State 29
+
+   15 declstmt: vardeclstmt .
+
+    $default  reduce using rule 15 (declstmt)
+
+
+State 30
+
+   16 declstmt: arraydeclstmt .
+
+    $default  reduce using rule 16 (declstmt)
+
+
+State 31
+
+   17 vardeclstmt: type . ceva0 ceva8
+   18 arraydeclstmt: type . ceva0 ceva2 ceva1 ceva3 ceva8
+
+    ceva0  shift, and go to state 50
+
+
+State 32
+
+   10 stmt: assignstmt .
+
+    $default  reduce using rule 10 (stmt)
+
+
+State 33
+
+   21 assignstmt: varassignstmt .
+
+    $default  reduce using rule 21 (assignstmt)
+
+
+State 34
+
+   22 assignstmt: arrayassignstmt .
+
+    $default  reduce using rule 22 (assignstmt)
+
+
+State 35
+
+   11 stmt: iostmt .
+
+    $default  reduce using rule 11 (stmt)
+
+
+State 36
+
+   25 iostmt: input .
+
+    $default  reduce using rule 25 (iostmt)
+
+
+State 37
+
+   26 iostmt: output .
+
+    $default  reduce using rule 26 (iostmt)
+
+
+State 38
+
+   12 stmt: whilestmt .
+
+    $default  reduce using rule 12 (stmt)
+
+
+State 39
+
+   14 stmt: ifstmt .
+
+    $default  reduce using rule 14 (stmt)
+
+
+State 40
+
+   13 stmt: forstmt .
+
+    $default  reduce using rule 13 (stmt)
+
+
+State 41
+
+   24 arrayassignstmt: ceva0 ceva2 . ceva1 ceva3 ceva21 expresie ceva8
+
+    ceva1  shift, and go to state 51
+
+
+State 42
+
+   23 varassignstmt: ceva0 ceva21 . expresie ceva8
+
+    ceva0  shift, and go to state 52
+    ceva1  shift, and go to state 53
+
+    expresie  go to state 54
+    term      go to state 55
+
+
+State 43
+
+   29 whilestmt: ceva35 ceva6 . conditie ceva7 stmtlist
+
+    ceva0  shift, and go to state 52
+    ceva1  shift, and go to state 53
+
+    conditie  go to state 56
+    expresie  go to state 57
+    term      go to state 55
+
+
+State 44
+
+   30 ifstmt: ceva36 ceva6 . conditie ceva7 stmtlist
+   31       | ceva36 ceva6 . conditie ceva7 stmtlist ceva37 stmtlist
+
+    ceva0  shift, and go to state 52
+    ceva1  shift, and go to state 53
+
+    conditie  go to state 58
+    expresie  go to state 57
+    term      go to state 55
+
+
+State 45
+
+   28 output: ceva38 ceva11 . expresie ceva8
+
+    ceva0  shift, and go to state 52
+    ceva1  shift, and go to state 53
+
+    expresie  go to state 59
+    term      go to state 55
+
+
+State 46
+
+   27 input: ceva39 ceva12 . ceva0 ceva8
+
+    ceva0  shift, and go to state 60
+
+
+State 47
+
+   32 forstmt: ceva41 ceva6 . varassignstmt ceva8 conditie ceva8 varmodifystmt ceva7 ceva4 stmtlist ceva5
+
+    ceva0  shift, and go to state 61
+
+    varassignstmt  go to state 62
+
+
+State 48
+
+    6 stmtlist: ceva4 auxstmt ceva5 .
+
+    $default  reduce using rule 6 (stmtlist)
+
+
+State 49
+
+    7 auxstmt: stmt auxstmt .
+
+    $default  reduce using rule 7 (auxstmt)
+
+
+State 50
+
+   17 vardeclstmt: type ceva0 . ceva8
+   18 arraydeclstmt: type ceva0 . ceva2 ceva1 ceva3 ceva8
+
+    ceva2  shift, and go to state 63
+    ceva8  shift, and go to state 64
+
+
+State 51
+
+   24 arrayassignstmt: ceva0 ceva2 ceva1 . ceva3 ceva21 expresie ceva8
+
+    ceva3  shift, and go to state 65
+
+
+State 52
+
+   47 term: ceva0 .
+
+    $default  reduce using rule 47 (term)
+
+
+State 53
+
+   48 term: ceva1 .
+
+    $default  reduce using rule 48 (term)
+
+
+State 54
+
+   23 varassignstmt: ceva0 ceva21 expresie . ceva8
+   38 expresie: expresie . operatie expresie
+
+    ceva8   shift, and go to state 66
+    ceva14  shift, and go to state 67
+    ceva15  shift, and go to state 68
+    ceva16  shift, and go to state 69
+    ceva17  shift, and go to state 70
+    ceva18  shift, and go to state 71
+    ceva25  shift, and go to state 72
+    ceva26  shift, and go to state 73
+
+    operatie  go to state 74
+
+
+State 55
+
+   39 expresie: term .
+
+    $default  reduce using rule 39 (expresie)
+
+
+State 56
+
+   29 whilestmt: ceva35 ceva6 conditie . ceva7 stmtlist
+
+    ceva7  shift, and go to state 75
+
+
+State 57
+
+   37 conditie: expresie .
+   38 expresie: expresie . operatie expresie
+
+    ceva14  shift, and go to state 67
+    ceva15  shift, and go to state 68
+    ceva16  shift, and go to state 69
+    ceva17  shift, and go to state 70
+    ceva18  shift, and go to state 71
+    ceva25  shift, and go to state 72
+    ceva26  shift, and go to state 73
+
+    $default  reduce using rule 37 (conditie)
+
+    operatie  go to state 74
+
+
+State 58
+
+   30 ifstmt: ceva36 ceva6 conditie . ceva7 stmtlist
+   31       | ceva36 ceva6 conditie . ceva7 stmtlist ceva37 stmtlist
+
+    ceva7  shift, and go to state 76
+
+
+State 59
+
+   28 output: ceva38 ceva11 expresie . ceva8
+   38 expresie: expresie . operatie expresie
+
+    ceva8   shift, and go to state 77
+    ceva14  shift, and go to state 67
+    ceva15  shift, and go to state 68
+    ceva16  shift, and go to state 69
+    ceva17  shift, and go to state 70
+    ceva18  shift, and go to state 71
+    ceva25  shift, and go to state 72
+    ceva26  shift, and go to state 73
+
+    operatie  go to state 74
+
+
+State 60
+
+   27 input: ceva39 ceva12 ceva0 . ceva8
+
+    ceva8  shift, and go to state 78
+
+
+State 61
+
+   23 varassignstmt: ceva0 . ceva21 expresie ceva8
+
+    ceva21  shift, and go to state 42
+
+
+State 62
+
+   32 forstmt: ceva41 ceva6 varassignstmt . ceva8 conditie ceva8 varmodifystmt ceva7 ceva4 stmtlist ceva5
+
+    ceva8  shift, and go to state 79
+
+
+State 63
+
+   18 arraydeclstmt: type ceva0 ceva2 . ceva1 ceva3 ceva8
+
+    ceva1  shift, and go to state 80
+
+
+State 64
+
+   17 vardeclstmt: type ceva0 ceva8 .
+
+    $default  reduce using rule 17 (vardeclstmt)
+
+
+State 65
+
+   24 arrayassignstmt: ceva0 ceva2 ceva1 ceva3 . ceva21 expresie ceva8
+
+    ceva21  shift, and go to state 81
+
+
+State 66
+
+   23 varassignstmt: ceva0 ceva21 expresie ceva8 .
+
+    $default  reduce using rule 23 (varassignstmt)
+
+
+State 67
+
+   40 operatie: ceva14 .
+
+    $default  reduce using rule 40 (operatie)
+
+
+State 68
+
+   41 operatie: ceva15 .
+
+    $default  reduce using rule 41 (operatie)
+
+
+State 69
+
+   42 operatie: ceva16 .
+
+    $default  reduce using rule 42 (operatie)
+
+
+State 70
+
+   43 operatie: ceva17 .
+
+    $default  reduce using rule 43 (operatie)
+
+
+State 71
+
+   44 operatie: ceva18 .
+
+    $default  reduce using rule 44 (operatie)
+
+
+State 72
+
+   46 operatie: ceva25 .
+
+    $default  reduce using rule 46 (operatie)
+
+
+State 73
+
+   45 operatie: ceva26 .
+
+    $default  reduce using rule 45 (operatie)
+
+
+State 74
+
+   38 expresie: expresie operatie . expresie
+
+    ceva0  shift, and go to state 52
+    ceva1  shift, and go to state 53
+
+    expresie  go to state 82
+    term      go to state 55
+
+
+State 75
+
+   29 whilestmt: ceva35 ceva6 conditie ceva7 . stmtlist
+
+    ceva4  shift, and go to state 16
+
+    stmtlist  go to state 83
+
+
+State 76
+
+   30 ifstmt: ceva36 ceva6 conditie ceva7 . stmtlist
+   31       | ceva36 ceva6 conditie ceva7 . stmtlist ceva37 stmtlist
+
+    ceva4  shift, and go to state 16
+
+    stmtlist  go to state 84
+
+
+State 77
+
+   28 output: ceva38 ceva11 expresie ceva8 .
+
+    $default  reduce using rule 28 (output)
+
+
+State 78
+
+   27 input: ceva39 ceva12 ceva0 ceva8 .
+
+    $default  reduce using rule 27 (input)
+
+
+State 79
+
+   32 forstmt: ceva41 ceva6 varassignstmt ceva8 . conditie ceva8 varmodifystmt ceva7 ceva4 stmtlist ceva5
+
+    ceva0  shift, and go to state 52
+    ceva1  shift, and go to state 53
+
+    conditie  go to state 85
+    expresie  go to state 57
+    term      go to state 55
+
+
+State 80
+
+   18 arraydeclstmt: type ceva0 ceva2 ceva1 . ceva3 ceva8
+
+    ceva3  shift, and go to state 86
+
+
+State 81
+
+   24 arrayassignstmt: ceva0 ceva2 ceva1 ceva3 ceva21 . expresie ceva8
+
+    ceva0  shift, and go to state 52
+    ceva1  shift, and go to state 53
+
+    expresie  go to state 87
+    term      go to state 55
+
+
+State 82
+
+   38 expresie: expresie . operatie expresie
+   38         | expresie operatie expresie .
+
+    ceva14  shift, and go to state 67
+    ceva15  shift, and go to state 68
+    ceva16  shift, and go to state 69
+    ceva17  shift, and go to state 70
+    ceva18  shift, and go to state 71
+    ceva25  shift, and go to state 72
+    ceva26  shift, and go to state 73
+
+    ceva14    [reduce using rule 38 (expresie)]
+    ceva15    [reduce using rule 38 (expresie)]
+    ceva16    [reduce using rule 38 (expresie)]
+    ceva17    [reduce using rule 38 (expresie)]
+    ceva18    [reduce using rule 38 (expresie)]
+    ceva25    [reduce using rule 38 (expresie)]
+    ceva26    [reduce using rule 38 (expresie)]
+    $default  reduce using rule 38 (expresie)
+
+    operatie  go to state 74
+
+
+State 83
+
+   29 whilestmt: ceva35 ceva6 conditie ceva7 stmtlist .
+
+    $default  reduce using rule 29 (whilestmt)
+
+
+State 84
+
+   30 ifstmt: ceva36 ceva6 conditie ceva7 stmtlist .
+   31       | ceva36 ceva6 conditie ceva7 stmtlist . ceva37 stmtlist
+
+    ceva37  shift, and go to state 88
+
+    $default  reduce using rule 30 (ifstmt)
+
+
+State 85
+
+   32 forstmt: ceva41 ceva6 varassignstmt ceva8 conditie . ceva8 varmodifystmt ceva7 ceva4 stmtlist ceva5
+
+    ceva8  shift, and go to state 89
+
+
+State 86
+
+   18 arraydeclstmt: type ceva0 ceva2 ceva1 ceva3 . ceva8
+
+    ceva8  shift, and go to state 90
+
+
+State 87
+
+   24 arrayassignstmt: ceva0 ceva2 ceva1 ceva3 ceva21 expresie . ceva8
+   38 expresie: expresie . operatie expresie
+
+    ceva8   shift, and go to state 91
+    ceva14  shift, and go to state 67
+    ceva15  shift, and go to state 68
+    ceva16  shift, and go to state 69
+    ceva17  shift, and go to state 70
+    ceva18  shift, and go to state 71
+    ceva25  shift, and go to state 72
+    ceva26  shift, and go to state 73
+
+    operatie  go to state 74
+
+
+State 88
+
+   31 ifstmt: ceva36 ceva6 conditie ceva7 stmtlist ceva37 . stmtlist
+
+    ceva4  shift, and go to state 16
+
+    stmtlist  go to state 92
+
+
+State 89
+
+   32 forstmt: ceva41 ceva6 varassignstmt ceva8 conditie ceva8 . varmodifystmt ceva7 ceva4 stmtlist ceva5
+
+    ceva0  shift, and go to state 93
+
+    varmodifystmt     go to state 94
+    varindentstmt     go to state 95
+    vardecrementstmt  go to state 96
+
+
+State 90
+
+   18 arraydeclstmt: type ceva0 ceva2 ceva1 ceva3 ceva8 .
+
+    $default  reduce using rule 18 (arraydeclstmt)
+
+
+State 91
+
+   24 arrayassignstmt: ceva0 ceva2 ceva1 ceva3 ceva21 expresie ceva8 .
+
+    $default  reduce using rule 24 (arrayassignstmt)
+
+
+State 92
+
+   31 ifstmt: ceva36 ceva6 conditie ceva7 stmtlist ceva37 stmtlist .
+
+    $default  reduce using rule 31 (ifstmt)
+
+
+State 93
+
+   35 varindentstmt: ceva0 . ceva31
+   36 vardecrementstmt: ceva0 . ceva30
+
+    ceva30  shift, and go to state 97
+    ceva31  shift, and go to state 98
+
+
+State 94
+
+   32 forstmt: ceva41 ceva6 varassignstmt ceva8 conditie ceva8 varmodifystmt . ceva7 ceva4 stmtlist ceva5
+
+    ceva7  shift, and go to state 99
+
+
+State 95
+
+   33 varmodifystmt: varindentstmt .
+
+    $default  reduce using rule 33 (varmodifystmt)
+
+
+State 96
+
+   34 varmodifystmt: vardecrementstmt .
+
+    $default  reduce using rule 34 (varmodifystmt)
+
+
+State 97
+
+   36 vardecrementstmt: ceva0 ceva30 .
+
+    $default  reduce using rule 36 (vardecrementstmt)
+
+
+State 98
+
+   35 varindentstmt: ceva0 ceva31 .
+
+    $default  reduce using rule 35 (varindentstmt)
+
+
+State 99
+
+   32 forstmt: ceva41 ceva6 varassignstmt ceva8 conditie ceva8 varmodifystmt ceva7 . ceva4 stmtlist ceva5
+
+    ceva4  shift, and go to state 100
+
+
+State 100
+
+   32 forstmt: ceva41 ceva6 varassignstmt ceva8 conditie ceva8 varmodifystmt ceva7 ceva4 . stmtlist ceva5
+
+    ceva4  shift, and go to state 16
+
+    stmtlist  go to state 101
+
+
+State 101
+
+   32 forstmt: ceva41 ceva6 varassignstmt ceva8 conditie ceva8 varmodifystmt ceva7 ceva4 stmtlist . ceva5
+
+    ceva5  shift, and go to state 102
+
+
+State 102
+
+   32 forstmt: ceva41 ceva6 varassignstmt ceva8 conditie ceva8 varmodifystmt ceva7 ceva4 stmtlist ceva5 .
+
+    $default  reduce using rule 32 (forstmt)
