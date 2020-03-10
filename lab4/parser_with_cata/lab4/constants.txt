@@ -1,0 +1,1 @@
+Token(type='NUMBER', value='4', lineno=1, index=15)

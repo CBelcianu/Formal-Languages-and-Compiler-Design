@@ -1,31 +1,61 @@
 from Specs import *
 from ProgramInternalForm import ProgramInternalForm
-from Scanner import tokenize, isIdentifier, isConstant
 from SymbolTable import SymbolTable
+from Scanner import tokenize, isIdentifier, isIntConstant, isCharConstant
 
-
-fileName = "p1.txt"
+fileName = 'p1.txt'
 file = open(fileName, 'r')
-
+lines = file.readlines()
 symbolTable = SymbolTable()
 pif = ProgramInternalForm()
 
-with open(fileName, 'r') as file:
-    lineNo = 0
-    for line in file:
-        lineNo += 1
-        for token in tokenize(line[0:-1], separators):
-            if token in toEncode[2:]:
-                pif.add(codification[token], -1)
-            elif isIdentifier(token):
-                uid = symbolTable.add(len(token), token)
-                pif.add(codification['identifier'], uid)
-            elif isConstant(token):
-                uid = symbolTable.add(int(token.replace('\'', '').replace('-', '').replace('+', '')), token) if token.replace('\'', '').replace('-', '').replace('+', '').isdigit()\
-                    else symbolTable.add(ord(token.replace('\'', '')), token)
-                pif.add(codification['constant'], uid)
+counter = 0
+for line in lines:
+    counter += 1
+    tokens = tokenize(line[0:-1], separators)
+    i = 0
+    while i in range(len(tokens)):
+        if tokens[i] in toEncode:
+            if tokens[i] == ' ':
+                i += 1
+            elif tokens[i] != '+' and tokens[i] != '-':
+                pif.add(codification[tokens[i]], -1)
+                i += 1
+            elif (tokens[i] == '-' or tokens[i] == '+') and isIntConstant(tokens[i+1]) and tokens[i-1] in toEncode:
+                pos = symbolTable.get(tokens[i]+tokens[i+1])
+                if pos is None:
+                    pos = symbolTable.add(int(tokens[i+1]), tokens[i]+tokens[i+1])
+                pif.add(codification['constant'], pos)
+                i += 2
+            elif (tokens[i] == '-' or tokens[i] == '+') and isIdentifier(tokens[i+1]) and tokens[i-1] in toEncode:
+                pos = symbolTable.get(tokens[i] + tokens[i + 1])
+                if pos is None:
+                    pos = symbolTable.add(len(tokens[i+1]), tokens[i] + tokens[i+1])
+                pif.add(codification['constant'], pos)
+                i += 2
             else:
-                raise Exception('Unknown token ' + token + ' at line ' + str(lineNo))
+                pif.add(codification[tokens[i]], -1)
+                i += 1
+        elif isIdentifier(tokens[i]):
+            pos = symbolTable.get(tokens[i])
+            if pos is None:
+                pos = symbolTable.add(len(tokens[i]), tokens[i])
+            pif.add(codification['identifier'], pos)
+            i += 1
+        elif isCharConstant(tokens[i]):
+            pos = symbolTable.get(tokens[i])
+            if pos is None:
+                pos = symbolTable.add(ord(tokens[i].replace('\'','')), tokens[i])
+            pif.add(codification['constant'], pos)
+            i += 1
+        elif isIntConstant(tokens[i]):
+            pos = symbolTable.get(tokens[i])
+            if pos is None:
+                pos = symbolTable.add(ord(tokens[i].replace('\'', '')), tokens[i])
+            pif.add(codification['constant'], pos)
+            i += 1
+        else:
+            raise Exception('Unknown token ' + tokens[i] + ' at line ' + str(counter))
 
 print('\nProgram Internal Form: \n', pif)
 print('\nSymbol Table: \n', symbolTable)
